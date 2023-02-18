@@ -1,4 +1,4 @@
-# phone_store
+# phone-store
 
 ## CLI Commands
 
