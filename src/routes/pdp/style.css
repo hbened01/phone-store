@@ -1,0 +1,7 @@
+.pdp {
+	@apply text-center flex;
+}
+
+.pdp section {
+	@apply mt-16 flex flex-col gap-3;
+}

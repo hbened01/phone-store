@@ -1,0 +1,7 @@
+.plp {
+	@apply text-center flex;
+}
+
+.plp section {
+	@apply mt-16 flex flex-col gap-3;
+}
