@@ -1,17 +1,39 @@
 import { h } from "preact";
-import { useContext } from "preact/hooks";
+import { useContext, useState } from "preact/hooks";
 import { Context } from "@/contexts";
-import Card from "@/components/card";
+import { Card, Search } from "@/components";
 import style from "./style.css";
 
 const Plp = () => {
   const { phoneListStorage } = useContext(Context);
+  const [listPhoneFiltered, setListPhoneFiltered] = useState(phoneListStorage?.dataListPhones);
+
+  const handleDataFiltered = (filter) => {
+    const data = phoneListStorage?.dataListPhones?.filter(
+      ({ model, brand, price }) => {
+        if (filter === "") return true;
+        if (
+          model?.toLowerCase()?.includes(filter) ||
+          brand?.toLowerCase()?.includes(filter) ||
+          price?.includes(filter)
+        )
+          return true;
+        return false;
+      }
+    );
+    setListPhoneFiltered(data);
+  };
 
   return (
     <div class={style.plp}>
       <section>
-        {phoneListStorage?.dataListPhones?.map((phone) => (
-          <Card key={phone.id} {...phone} handleOnClickPhoneSelected={(id)=> console.log(id)} />
+        <Search placeholder="Search" count={listPhoneFiltered?.length} onChange={handleDataFiltered} />
+        {listPhoneFiltered?.map((phone) => (
+          <Card
+            key={phone.id}
+            {...phone}
+            handleOnClickPhoneSelected={(txt) => console.log(txt)}
+          />
         ))}
       </section>
     </div>

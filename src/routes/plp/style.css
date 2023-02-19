@@ -1,7 +1,7 @@
 .plp {
-  @apply bg-gradient-to-l from-blue-50 to-blue-500 border h-full w-full min-h-screen;
+  @apply bg-gradient-to-l from-blue-50 to-blue-500 border h-full w-full min-h-screen pt-[2%];
 }
 
 .plp section {
-	@apply flex flex-wrap gap-5 pt-20 pb-5 items-center justify-around text-left;
+	@apply flex flex-wrap gap-5 pt-40 pb-5 items-center justify-around text-left relative;
 }

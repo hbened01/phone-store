@@ -2,7 +2,7 @@ import { h } from "preact";
 import { Router } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
 import { addMinutes, getTime } from "date-fns";
-import Header from "./header";
+import { Header } from "@/components";
 import { Context } from "@/contexts";
 import { getListPlp } from "@/services";
 
@@ -10,9 +10,9 @@ import { getListPlp } from "@/services";
 import Plp from "@/routes/plp";
 
 const App = () => {
-  const [phoneListStorage, setPhoneListStorage] = useState(JSON.parse(
-    window.localStorage.getItem("DATA_PHONE_STORE")
-  ) || []);
+  const [phoneListStorage, setPhoneListStorage] = useState(
+    JSON.parse(window.localStorage.getItem("DATA_PHONE_STORE")) || []
+  );
 
   useEffect(() => {
     // Get data list:
@@ -40,7 +40,7 @@ const App = () => {
     }
     setTimeout(() => {
       setPhoneListStorage(phoneListStorage);
-    }, 500);
+    }, 1000);
   }, [phoneListStorage]);
 
   return (
