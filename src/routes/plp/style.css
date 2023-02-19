@@ -1,5 +1,5 @@
 .plp {
-  @apply bg-gradient-to-l from-blue-50 to-blue-500 border h-full w-full min-h-screen pt-[2%];
+  @apply border h-full w-full min-h-screen;
 }
 
 .plp section {

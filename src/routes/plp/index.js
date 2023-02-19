@@ -1,12 +1,14 @@
 import { h } from "preact";
 import { useContext, useState } from "preact/hooks";
 import { Context } from "@/contexts";
-import { Card, Search } from "@/components";
+import { Card, Search, Loader } from "@/components";
 import style from "./style.css";
 
 const Plp = () => {
-  const { phoneListStorage } = useContext(Context);
-  const [listPhoneFiltered, setListPhoneFiltered] = useState(phoneListStorage?.dataListPhones);
+  const { phoneListStorage, isLoading } = useContext(Context);
+  const [listPhoneFiltered, setListPhoneFiltered] = useState(
+    phoneListStorage?.dataListPhones
+  );
 
   const handleDataFiltered = (filter) => {
     const data = phoneListStorage?.dataListPhones?.filter(
@@ -25,18 +27,27 @@ const Plp = () => {
   };
 
   return (
-    <div class={style.plp}>
-      <section>
-        <Search placeholder="Search" count={listPhoneFiltered?.length} onChange={handleDataFiltered} />
-        {listPhoneFiltered?.map((phone) => (
-          <Card
-            key={phone.id}
-            {...phone}
-            handleOnClickPhoneSelected={(txt) => console.log(txt)}
-          />
-        ))}
-      </section>
-    </div>
+    <>
+      {!isLoading && (
+        <div class={style.plp}>
+          <section>
+            <Search
+              placeholder="Search"
+              count={listPhoneFiltered?.length}
+              onChange={handleDataFiltered}
+            />
+            {listPhoneFiltered?.map((phone) => (
+              <Card
+                key={phone.id}
+                {...phone}
+                handleOnClickPhoneSelected={(txt) => console.log(txt)}
+              />
+            ))}
+          </section>
+        </div>
+      )}
+      {isLoading && <Loader />}
+    </>
   );
 };
 

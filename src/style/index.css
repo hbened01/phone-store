@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	font-family: 'Helvetica Neue', arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  @apply bg-gradient-to-l from-blue-50 to-blue-500
+}
+
+body {
+  @apply m-0 p-0 min-h-screen
+}
+
+#app > main {
+  @apply flex pt-[3.5rem] items-center justify-center;
+	min-height: calc(100vh - 3.5rem);
+	margin: 0 auto;
+}
+
+@media (max-width: 639px) {
+	#app > main {
+		margin: 0 2rem;
+	}
+}

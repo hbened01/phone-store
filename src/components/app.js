@@ -14,7 +14,10 @@ const App = () => {
     JSON.parse(window.localStorage.getItem("DATA_PHONE_STORE")) || []
   );
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     // Get data list:
     if (
       getTime(new Date()) > phoneListStorage?.dateControl ||
@@ -22,6 +25,7 @@ const App = () => {
     ) {
       getListPlp()
         .then((data) => {
+          setIsLoading(true);
           const dateControlApiTime = getTime(addMinutes(new Date(), 15)); // CONTROL API TIME 15 MIN.
           const dataStorage = {
             dateControl: dateControlApiTime,
@@ -35,11 +39,13 @@ const App = () => {
           // SET DATA IN THE STATE:
           setPhoneListStorage(dataStorage);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .finally(() => setIsLoading(false));
       return;
     }
     setTimeout(() => {
       setPhoneListStorage(phoneListStorage);
+      setIsLoading(false);
     }, 1000);
   }, [phoneListStorage]);
 
@@ -49,6 +55,7 @@ const App = () => {
         value={{
           phoneListStorage,
           setPhoneListStorage,
+          isLoading,
         }}
       >
         <Header />
