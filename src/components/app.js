@@ -2,7 +2,7 @@ import { h } from "preact";
 import { Router } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
 import { addMinutes, getTime } from "date-fns";
-import Header from "./header";
+import { Header } from "@/components";
 import { Context } from "@/contexts";
 import { getListPlp } from "@/services";
 
@@ -10,11 +10,14 @@ import { getListPlp } from "@/services";
 import Plp from "@/routes/plp";
 
 const App = () => {
-  const [phoneListStorage, setPhoneListStorage] = useState(JSON.parse(
-    window.localStorage.getItem("DATA_PHONE_STORE")
-  ) || []);
+  const [phoneListStorage, setPhoneListStorage] = useState(
+    JSON.parse(window.localStorage.getItem("DATA_PHONE_STORE")) || []
+  );
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     // Get data list:
     if (
       getTime(new Date()) > phoneListStorage?.dateControl ||
@@ -22,6 +25,7 @@ const App = () => {
     ) {
       getListPlp()
         .then((data) => {
+          setIsLoading(true);
           const dateControlApiTime = getTime(addMinutes(new Date(), 15)); // CONTROL API TIME 15 MIN.
           const dataStorage = {
             dateControl: dateControlApiTime,
@@ -35,12 +39,14 @@ const App = () => {
           // SET DATA IN THE STATE:
           setPhoneListStorage(dataStorage);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .finally(() => setIsLoading(false));
       return;
     }
     setTimeout(() => {
       setPhoneListStorage(phoneListStorage);
-    }, 500);
+      setIsLoading(false);
+    }, 1000);
   }, [phoneListStorage]);
 
   return (
@@ -49,6 +55,7 @@ const App = () => {
         value={{
           phoneListStorage,
           setPhoneListStorage,
+          isLoading,
         }}
       >
         <Header />
