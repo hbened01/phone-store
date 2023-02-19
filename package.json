@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --dest docs",
     "serve": "sirv build --port 8080 --cors --single",
-    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact watch -H phone-store --port 8080",
-    "lint": "eslint src",
-    "test": "jest"
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact watch -H phone-store --port 8080",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --dest docs",
+    "test": "jest",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": "preact",
