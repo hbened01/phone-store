@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "sirv build --port 8080 --cors --single",
-    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact watch -H phone-store --port 8080",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact watch -H phone-store.com --port 8080",
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --dest docs",
     "test": "jest",
     "lint": "eslint src"
