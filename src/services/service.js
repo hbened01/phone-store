@@ -1,11 +1,12 @@
 import axios from "axios";
 import { PREACT_APP_API_URL } from "@/constants/";
-console.log(PREACT_APP_API_URL)
 
 const { create } = axios;
 
+const url  = PREACT_APP_API_URL ?? "https://itx-frontend-test.onrender.com";
+
 const service = create({
-  baseURL: PREACT_APP_API_URL,
+  baseURL: url,
   timeout: 10000,
 });
 

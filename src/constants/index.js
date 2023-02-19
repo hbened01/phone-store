@@ -1,3 +1,3 @@
-const { PREACT_APP_API_URL } = process.env || "https://itx-frontend-test.onrender.com";
+const { PREACT_APP_API_URL } = process.env;
 
 export { PREACT_APP_API_URL };
