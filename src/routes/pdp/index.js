@@ -7,7 +7,7 @@ const Pdp = ({id}) => {
   return (
     <div class={style.pdp}>
       <section>
-        <h1 class="text-3xl font-bold underline">Hello world!</h1>
+        <h1 class="text-3xl font-bold underline">Hello world! {id}</h1>
       </section>
     </div>
   );
