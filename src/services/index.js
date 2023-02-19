@@ -1,5 +1,3 @@
-import getListPlp from "./getListPlp"
+import getListPlp from "./getListPlp";
 
-export {
-  getListPlp,
-}
+export { getListPlp };

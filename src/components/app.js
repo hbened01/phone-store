@@ -8,6 +8,8 @@ import { getListPlp } from "@/services";
 
 // Code-splitting is automated for `routes` directory
 import Plp from "@/routes/plp";
+import Pdp from "@/routes/pdp";
+
 
 const App = () => {
   const [phoneListStorage, setPhoneListStorage] = useState(
@@ -62,6 +64,7 @@ const App = () => {
         <main>
           <Router>
             <Plp path="/" />
+				    <Pdp path="/pdp/:id" />
           </Router>
         </main>
       </Context.Provider>

@@ -2,7 +2,9 @@ import { h } from "preact";
 import PropTypes from "prop-types";
 import { FaEuroSign } from "react-icons/fa";
 import CurrencyFormat from "react-currency-format";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import style from "./style.css";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Card = ({
   imgUrl,
@@ -19,7 +21,7 @@ const Card = ({
         onClick={() => handleOnClickPhoneSelected(id)}
       >
         <div className="flex flex-col items-stretch">
-          <img src={imgUrl} alt={id} />
+          <LazyLoadImage delayTime={500} effect="blur" src={imgUrl} alt={id} />
           <div className={style.body}>
             <div className={style.title}>{model}</div>
             <div className={style.subtitle} data-testid="text-subtitle">

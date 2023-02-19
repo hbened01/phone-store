@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --dest docs",
     "serve": "sirv build --port 8080 --cors --single",
-    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact watch -H phone-store --port 8080",
-    "lint": "eslint src",
-    "test": "jest"
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact watch -H phone-store.com --port 8080",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider preact build --dest docs",
+    "test": "jest",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": "preact",
@@ -39,7 +39,8 @@
     "preact-router": "^3.2.1",
     "prop-types": "^15.8.1",
     "react-currency-format": "^1.1.0",
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.7.1",
+    "react-lazy-load-image-component": "^1.5.6"
   },
   "jest": {
     "preset": "jest-preset-preact",
