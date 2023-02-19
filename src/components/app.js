@@ -3,11 +3,11 @@ import { Router } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
 import { addMinutes, getTime } from "date-fns";
 import Header from "./header";
-import { Context } from "./../contexts";
-import { getListPlp } from "./../services";
+import { Context } from "@/contexts";
+import { getListPlp } from "@/services";
 
 // Code-splitting is automated for `routes` directory
-import Plp from "../routes/plp";
+import Plp from "@/routes/plp";
 
 const App = () => {
   const [phoneListStorage, setPhoneListStorage] = useState(JSON.parse(
