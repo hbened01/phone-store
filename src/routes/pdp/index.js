@@ -1,14 +1,9 @@
 import { h } from "preact";
-import { useEffect } from 'preact/hooks';
+// import { useEffect } from 'preact/hooks';
 import style from "./style.css";
-import { getListPlp } from "../../services"
 
-const Pdp = () => {
-
-  useEffect(() => {
-    getListPdp().then((data) => {console.log(data)});
-  }, []);
-
+const Pdp = ({id}) => {
+  console.log(id)
   return (
     <div class={style.pdp}>
       <section>

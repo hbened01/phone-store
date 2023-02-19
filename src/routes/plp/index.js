@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { useContext, useState } from "preact/hooks";
+import { route } from "preact-router";
 import { Context } from "@/contexts";
 import { Card, Search, Loader } from "@/components";
 import style from "./style.css";
@@ -9,6 +10,10 @@ const Plp = () => {
   const [listPhoneFiltered, setListPhoneFiltered] = useState(
     phoneListStorage?.dataListPhones
   );
+
+  const handleLinkToPdpPhone = (id) => {
+    route(`/pdp/${id}`, true);
+  }
 
   const handleDataFiltered = (filter) => {
     const data = phoneListStorage?.dataListPhones?.filter(
@@ -40,7 +45,7 @@ const Plp = () => {
               <Card
                 key={phone.id}
                 {...phone}
-                handleOnClickPhoneSelected={(txt) => console.log(txt)}
+                handleOnClickPhoneSelected={handleLinkToPdpPhone}
               />
             ))}
           </section>
