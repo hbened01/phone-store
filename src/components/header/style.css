@@ -1,5 +1,5 @@
 .header {
-	@apply flex fixed left-0 top-0 justify-between w-[100%] h-[3.5rem] bg-gradient-to-r from-blue-900 to-cyan-700 z-50;
+	@apply flex fixed left-0 top-0 justify-start w-[100%] h-[3.5rem] bg-gradient-to-r from-blue-900 to-cyan-700 z-50;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -9,12 +9,15 @@
 
 .header a:hover,
 .header a:active {
-	background: rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.1);
 }
 
-.header a.logo {
-	display: flex;
-	align-items: center;
+.header nav a.active {
+	@apply text-yellow-400;
+}
+
+.header div.logo {
+	@apply flex items-center text-gray-50;
 	padding: 0.5rem 1rem;
 }
 

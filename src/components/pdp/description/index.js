@@ -100,8 +100,8 @@ PdpDescription.propTypes = {
   os: PropTypes.string,
   displaySize: PropTypes.string,
   battery: PropTypes.string,
-  primaryCamera: PropTypes.string,
-  secondaryCmera: PropTypes.string,
+  primaryCamera: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  secondaryCmera: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   weight: PropTypes.string,
   dimentions: PropTypes.string,
 };
