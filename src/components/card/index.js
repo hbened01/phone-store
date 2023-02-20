@@ -1,10 +1,9 @@
 import { h } from "preact";
 import PropTypes from "prop-types";
-import { FaEuroSign } from "react-icons/fa";
 import CurrencyFormat from "react-currency-format";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { FaEuroSign } from "react-icons/fa";
+import { Image } from "@/components";
 import style from "./style.css";
-import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Card = ({
   imgUrl,
@@ -16,30 +15,39 @@ const Card = ({
 }) => {
   return (
     <>
-      <div
-        className={style.card}
-        onClick={() => handleOnClickPhoneSelected(id)}
-      >
+      <div className={style.card}>
         <div className="flex flex-col items-stretch">
-          <LazyLoadImage delayTime={500} effect="blur" src={imgUrl} alt={id} />
+          <Image
+            {...{
+              wrapperClass: "self-center pt-5",
+              delayTime: 500,
+              effect: "blur",
+              imgUrl,
+              id,
+            }}
+          />
           <div className={style.body}>
             <div className={style.title}>{model}</div>
             <div className={style.subtitle} data-testid="text-subtitle">
-              <span className="underline underline-offset-2">Brand</span>:{" "}
-              {brand}
+              <span className="font-bold">Brand</span>: {brand}
             </div>
-
             <div className="flex items-center justify-between">
               <span className={style.price}>
                 <CurrencyFormat
                   value={price && price !== "" ? price : 0}
                   displayType={"text"}
                   thousandSeparator={true}
-                  renderText={price => <><FaEuroSign className="inline-flex" />{price}</>}
+                  renderText={(price) => (
+                    <>
+                      <FaEuroSign className="inline-flex" />
+                      {price}
+                    </>
+                  )}
                 />
               </span>
               <button
-                className={style['button-detail']}
+                className={style["button-detail"]}
+                onClick={() => handleOnClickPhoneSelected(id)}
               >
                 View
               </button>

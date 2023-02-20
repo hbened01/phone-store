@@ -1,7 +1,11 @@
 .pdp {
-	@apply text-center flex;
+  @apply flex h-full w-full min-h-screen;
 }
 
 .pdp section {
-	@apply mt-16 flex flex-col gap-3;
+	@apply text-gray-700 overflow-hidden bg-gradient-to-l from-gray-100 to-blue-100 w-full;
+}
+
+.pdp img {
+	@apply lg:w-1/2 md:w-9/12 w-4/5 object-cover object-center rounded border aspect-auto border-gray-100 drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
 }

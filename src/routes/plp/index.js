@@ -10,7 +10,7 @@ const Plp = () => {
   const [listPhoneFiltered, setListPhoneFiltered] = useState([]);
 
   const handleLinkToPdpPhone = (id) => {
-    route(`/pdp/${id}`, true);
+    route(`/pdp/${id}`);
   };
 
   const handleDataFiltered = (filter) => {
@@ -36,7 +36,7 @@ const Plp = () => {
   return (
     <>
       {!isLoading && (
-        <div class={style.plp}>
+        <div className={style.plp}>
           <section>
             <Search
               placeholder="Search"

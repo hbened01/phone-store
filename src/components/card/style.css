@@ -3,7 +3,7 @@
 }
 
 .card img {
-  @apply w-full object-cover object-center aspect-auto rounded-lg self-start drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
+  @apply w-40 object-cover object-center aspect-auto rounded-lg drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
 }
 
 .body {
@@ -11,15 +11,15 @@
 }
 
 .title {
-  @apply text-gray-700 text-3xl font-medium mb-1 truncate drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
+  @apply text-gray-700 text-2xl font-medium mb-1 truncate drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
 }
 
 .subtitle {
-  @apply text-gray-500 text-base mb-4 text-justify truncate drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
+  @apply text-gray-500 text-base mb-2 text-justify truncate drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
 }
 
 .price {
-  @apply text-4xl font-bold text-gray-600 drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
+  @apply text-2xl font-bold text-gray-600 drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
 }
 
 .button-detail {
