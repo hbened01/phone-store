@@ -1,4 +1,5 @@
 import { h } from "preact";
+import PropTypes from "prop-types";
 import { BsCpu, BsBattery, BsCamera } from "react-icons/bs";
 import { CgSmartphoneRam } from "react-icons/cg";
 import { AiOutlineAndroid } from "react-icons/ai";
@@ -25,13 +26,14 @@ function PdpDescription({
       <h2 className="text-sm title-font text-gray-500 tracking-widest">
         {brand}
       </h2>
-      <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+      <h1 className="text-gray-700 md:text-4xl text-xl font-medium mb-1 truncate drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]">
         {model}
       </h1>
-      <span>{announced}</span>
-      <p className="leading-relaxed mt-5">
-        <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white underline underline-offset-2">
-          Technical specifications:
+      <span className="font-normal text-gray-500">{announced}</span>
+      <div className="border-t-2 border-gray-200 my-5" />
+      <p className="leading-relaxed my-5">
+        <h2 className="mb-2 text-lg font-semibold text-gray-600 dark:text-white underline underline-offset-2">
+          Technical specifications
         </h2>
         <ul className="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
           {os && (
@@ -88,5 +90,20 @@ function PdpDescription({
     </>
   );
 }
+
+PdpDescription.propTypes = {
+  brand: PropTypes.string,
+  model: PropTypes.string,
+  announced: PropTypes.string,
+  cpu: PropTypes.string,
+  ram: PropTypes.string,
+  os: PropTypes.string,
+  displaySize: PropTypes.string,
+  battery: PropTypes.string,
+  primaryCamera: PropTypes.string,
+  secondaryCmera: PropTypes.string,
+  weight: PropTypes.string,
+  dimentions: PropTypes.string,
+};
 
 export default PdpDescription;

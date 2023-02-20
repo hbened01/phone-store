@@ -9,7 +9,6 @@ const Pdp = ({ id }) => {
   useEffect(() => {
     getProductByIdPdp(id)
       .then((data) => {
-        console.log(data);
         setProducDetail(data);
       })
       .catch((error) => console.log(error))
