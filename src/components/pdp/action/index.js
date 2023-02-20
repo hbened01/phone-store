@@ -25,7 +25,7 @@ function PdpAction({ price, colors }) {
         </div>
       </div>
       <div class="flex">
-        <span class="font-extrabold text-3xl text-gray-900">
+        <span class="font-extrabold text-3xl text-gray-900 drop-shadow-[1px_1px_1px_rgba(0,0,0,0.5)]">
           <CurrencyFormat
             value={price && price !== "" ? price : 0}
             displayType={"text"}

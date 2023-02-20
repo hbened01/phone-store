@@ -22,7 +22,7 @@ const App = () => {
     setIsLoading(true);
     // Get data list:
     if (
-      getTime(new Date()) > phoneListStorage?.dateControl ||
+      getTime(new Date()) > phoneListStorage?.timeControl ||
       !phoneListStorage?.dataListPhones
     ) {
       getListPlp()
@@ -30,7 +30,7 @@ const App = () => {
           setIsLoading(true);
           const dateControlApiTime = getTime(addHours(new Date(), 1)); // CONTROL API TIME 1 HOUR.
           const dataStorage = {
-            dateControl: dateControlApiTime,
+            timeControl: dateControlApiTime,
             dataListPhones: data,
           };
           // SET DATA IN LOCALSTORAGE:

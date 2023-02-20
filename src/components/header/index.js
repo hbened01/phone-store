@@ -7,7 +7,6 @@ import style from "./style.css";
 
 const Header = () => {
   const { phoneListStorage } = useContext(Context);
-  console.log(phoneListStorage);
   return (
     <header className={style.header}>
       <div className={style.logo}>
@@ -25,10 +24,8 @@ const Header = () => {
         </Link>
         <Match path="/pdp/:id">
           {({ matches, path, url }) => {
-            console.log(matches, path, url);
-            console.log(path.split("/")[2]);
             const productId = path?.split("/")[2];
-            const productModel = phoneListStorage?.dataListPhones.find(
+            const productModel = phoneListStorage?.dataListPhones?.find(
               ({ id }) => id === productId
             )?.model;
             return (
