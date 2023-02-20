@@ -17,7 +17,7 @@ const Search = ({ placeholder, onChange, count }) => {
         <input
           type="search"
           id="search"
-          className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500"
+          className="block w-full p-4 pl-10 text-sm rounded-lg font-bold text-gray-600 border border-gray-300 bg-gray-50 hover:bg-gray-100 active:bg-gray-100 focus:outline-none focus:ring focus:ring-violet-300"
           placeholder={placeholder}
           onChange={(e) => onChange(e?.target?.value?.toLowerCase() || "")}
         />
