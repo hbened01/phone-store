@@ -1,7 +1,7 @@
 import { h } from "preact";
 import { Router } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
-import { addMinutes, getTime } from "date-fns";
+import { addHours, getTime } from "date-fns";
 import { Header } from "@/components";
 import { Context } from "@/contexts";
 import { getListPlp } from "@/services";
@@ -28,7 +28,7 @@ const App = () => {
       getListPlp()
         .then((data) => {
           setIsLoading(true);
-          const dateControlApiTime = getTime(addMinutes(new Date(), 15)); // CONTROL API TIME 15 MIN.
+          const dateControlApiTime = getTime(addHours(new Date(), 1)); // CONTROL API TIME 1 HOUR.
           const dataStorage = {
             dateControl: dateControlApiTime,
             dataListPhones: data,
