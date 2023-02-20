@@ -1,3 +1,4 @@
 import getListPlp from "./getListPlp";
+import getProductByIdPdp from "./getProductByIdPdp";
 
-export { getListPlp };
+export { getListPlp, getProductByIdPdp };
