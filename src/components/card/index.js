@@ -15,10 +15,7 @@ const Card = ({
 }) => {
   return (
     <>
-      <div
-        className={style.card}
-        onClick={() => handleOnClickPhoneSelected(id)}
-      >
+      <div className={style.card}>
         <div className="flex flex-col items-stretch">
           <Image
             {...{
@@ -48,7 +45,12 @@ const Card = ({
                   )}
                 />
               </span>
-              <button className={style["button-detail"]}>View</button>
+              <button
+                className={style["button-detail"]}
+                onClick={() => handleOnClickPhoneSelected(id)}
+              >
+                View
+              </button>
             </div>
           </div>
         </div>
