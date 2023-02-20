@@ -3,5 +3,5 @@
 }
 
 .plp section {
-	@apply flex flex-wrap gap-5 pt-40 pb-5 items-center justify-around text-left relative;
+	@apply flex flex-wrap gap-5 pt-32 pb-5 items-center justify-around text-left relative;
 }

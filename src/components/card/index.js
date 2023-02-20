@@ -21,14 +21,13 @@ const Card = ({
         onClick={() => handleOnClickPhoneSelected(id)}
       >
         <div className="flex flex-col items-stretch">
-          <LazyLoadImage delayTime={500} effect="blur" src={imgUrl} alt={id} />
+          <LazyLoadImage wrapperClassName="self-center pt-5" delayTime={500} effect="blur" src={imgUrl} alt={id} />
           <div className={style.body}>
             <div className={style.title}>{model}</div>
             <div className={style.subtitle} data-testid="text-subtitle">
-              <span className="underline underline-offset-2">Brand</span>:{" "}
+              <span className="font-bold">Brand</span>:{" "}
               {brand}
             </div>
-
             <div className="flex items-center justify-between">
               <span className={style.price}>
                 <CurrencyFormat
