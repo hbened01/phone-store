@@ -17,7 +17,9 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [cartListStorage, setCartListStorage] = useState([]);
+  const [cartListStorage, setCartListStorage] = useState(JSON.parse(
+    window.localStorage.getItem("DATA_CART_ITEMS")
+  ) || []);
 
   const [notify, setNotify] = useState({
     type: "",

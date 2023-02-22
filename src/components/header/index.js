@@ -1,6 +1,7 @@
 import { h } from "preact";
 import Match, { Link } from "preact-router/match";
-import { useContext, useRef } from "preact/hooks";
+import { route } from "preact-router";
+import { useContext, useState, useRef, useEffect } from "preact/hooks";
 import CurrencyFormat from "react-currency-format";
 import { Context } from "@/contexts";
 import { BsCart3 } from "react-icons/bs";
@@ -9,13 +10,34 @@ import { GrMoney } from "react-icons/gr";
 import style from "./style.css";
 
 const Header = () => {
-  const { phoneListStorage, cartListStorage } = useContext(Context);
+  const [total, setTotal] = useState(0);
+  const { phoneListStorage, cartListStorage, setCartListStorage } = useContext(Context);
   const shoppingListElement = useRef(null);
 
   const handleToggleShoppingList = () => {
     if (cartListStorage?.length === 0) return;
     shoppingListElement.current.classList.toggle("hidden");
   };
+
+  const handleRemoveItemCart = (productId) => {
+    setCartListStorage((prevState) => {
+      const newCartListData = prevState.filter(({id}) => id !== productId );
+      // SET LIST DATA CART INTO LOCAL STORAGE:
+      window.localStorage.setItem(
+        "DATA_CART_ITEMS",
+        JSON.stringify(newCartListData)
+      );
+      return newCartListData;
+    });
+  };
+
+  useEffect(() => {
+    if (cartListStorage?.length === 0) {
+      shoppingListElement.current.classList.add("hidden");
+      return;
+    }
+    setTotal(cartListStorage.reduce((acc, { price }) => acc + Number(price), 0));
+  }, [cartListStorage]);
 
   return (
     <>
@@ -84,14 +106,13 @@ const Header = () => {
         <div className="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50">
           Shopping list
         </div>
-        <div className="divide-y divide-gray-100 dark:divide-gray-700">
+        <div className="divide-y divide-gray-100 dark:divide-gray-700 overflow-auto max-h-60">
           {cartListStorage?.map((product) => (
-            <Link
+            <button
               key={product?.id}
-              href={`/pdp/${product?.id}`}
-              className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex w-full px-4 py-3 hover:bg-gray-100 cursor-default"
             >
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 cursor-pointer" onClick={() => route(`/pdp/${product?.id}`)}>
                 <img
                   className="object-contain object-center rounded-lg w-14 h-14"
                   src={product?.imgUrl}
@@ -122,6 +143,7 @@ const Header = () => {
               </div>
               <button
                 type="button"
+                onClick={() => handleRemoveItemCart(product?.id)}
                 className="ml-4 -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8"
                 aria-label="Close"
               >
@@ -139,13 +161,24 @@ const Header = () => {
                   />
                 </svg>
               </button>
-            </Link>
+            </button>
           ))}
         </div>
         <div className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100">
           <div className="inline-flex items-center ">
             <GrMoney className="mr-1" />
-            Total
+            Total:{" "}
+            <CurrencyFormat
+              value={total && total !== "" ? total : 0}
+              displayType={"text"}
+              thousandSeparator={true}
+              renderText={(total) => (
+                <>
+                  <FaEuroSign className="inline-flex drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]" />
+                  {total}
+                </>
+              )}
+            />
           </div>
         </div>
       </div>

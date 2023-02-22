@@ -23,16 +23,25 @@ const Pdp = ({ id }) => {
     postToCart(product)
       .then(() => {
         // SET AND GET UNIQUE VALUES
-        setCartListStorage((prevState) =>
-          Object.values(
+        setCartListStorage((prevState) => {
+          const newCartListData = Object.values(
             [...prevState, product].reduce((a, p) => {
               a[`${p.id}|${p.colorCode}|${p.storageCode}`] = p;
               return a;
             }, {})
-          )
-        );
+          );
+          // SET LIST DATA CART INTO LOCAL STORAGE:
+          window.localStorage.setItem(
+            "DATA_CART_ITEMS",
+            JSON.stringify(newCartListData)
+          );
+          return newCartListData;
+        });
       })
-      .finally(() => route(`/`));
+      .finally(() => {
+        // GO TO HOME:
+        route(`/`);
+      });
   };
 
   useEffect(() => {
