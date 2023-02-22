@@ -1,4 +1,5 @@
 import getListPlp from "./getListPlp";
 import getProductByIdPdp from "./getProductByIdPdp";
+import postToCart from "./postToCart";
 
-export { getListPlp, getProductByIdPdp };
+export { postToCart, getListPlp, getProductByIdPdp };
