@@ -11,7 +11,7 @@ import style from "./style.css";
 const Pdp = ({ id }) => {
   const [productDetail, setProducDetail] = useState({});
   const productsDetailData = useRef(null);
-  const { setCartListStorage } = useContext(Context);
+  const { setCartListStorage, setNotify } = useContext(Context);
 
   // GET DATA FROM LOCAL STORAGE:
   productsDetailData.current = JSON.parse(
@@ -37,6 +37,17 @@ const Pdp = ({ id }) => {
           );
           return newCartListData;
         });
+      })
+      .catch((error) => {
+        // SET NOTIFY:
+        setNotify((prevState) => ({
+          ...prevState,
+          ...{
+            type: "danger",
+            message: error.message,
+            isNotify: true,
+          },
+        }));
       })
       .finally(() => {
         // GO TO HOME:
@@ -76,7 +87,17 @@ const Pdp = ({ id }) => {
           // SET DATA PRODUCT IN STATE:
           setProducDetail(data);
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+          // SET NOTIFY:
+          setNotify((prevState) => ({
+            ...prevState,
+            ...{
+              type: "danger",
+              message: error.message,
+              isNotify: true,
+            },
+          }));
+        })
         .finally(() => {});
       return;
     }
@@ -84,7 +105,7 @@ const Pdp = ({ id }) => {
       // SET DATA PRODUCT IN STATE:
       setProducDetail(productsDetailData.current[isMatchIndex]?.dataProduct);
     }, 500);
-  }, [id]);
+  }, [id, setNotify]);
   return (
     <>
       {!isObjectEmpty(productDetail) && (

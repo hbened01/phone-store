@@ -5,6 +5,6 @@ export default async (id) => {
     const { data } = await service.get(`/api/product/${id}`);
     return await data;
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };

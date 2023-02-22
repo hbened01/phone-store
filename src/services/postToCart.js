@@ -5,6 +5,6 @@ export default async (product) => {
     const { data } = await service.post(`/api/cart`, product);
     return await data;
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };

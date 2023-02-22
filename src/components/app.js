@@ -17,9 +17,9 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [cartListStorage, setCartListStorage] = useState(JSON.parse(
-    window.localStorage.getItem("DATA_CART_ITEMS")
-  ) || []);
+  const [cartListStorage, setCartListStorage] = useState(
+    JSON.parse(window.localStorage.getItem("DATA_CART_ITEMS")) || []
+  );
 
   const [notify, setNotify] = useState({
     type: "",
@@ -61,8 +61,27 @@ const App = () => {
           );
           // SET DATA IN THE STATE:
           setPhoneListStorage(dataStorage);
+          // SET NOTIFY:
+          setNotify((prevState) => ({
+            ...prevState,
+            ...{
+              type: "success",
+              message: "List phone was successfully updated",
+              isNotify: true,
+            },
+          }));
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+          // SET NOTIFY:
+          setNotify((prevState) => ({
+            ...prevState,
+            ...{
+              type: "danger",
+              message: error.message,
+              isNotify: true,
+            },
+          }));
+        })
         .finally(() => setIsLoading(false));
       return;
     }
