@@ -28,7 +28,7 @@ const Pdp = ({ id }) => {
     ) {
       getProductByIdPdp(id)
         .then((data) => {
-          const timeControl = getTime(addHours(new Date(), 24)); // CONTROL EPISODE API TIME 24 HRS.
+          const timeControl = getTime(addHours(new Date(), 1)); // CONTROL EPISODE API TIME 1 HRS.
           const newDataForStorage = [
             ...(productsDetailData.current || []),
             ...[

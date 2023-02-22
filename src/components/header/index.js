@@ -23,7 +23,7 @@ const Header = () => {
           Home
         </Link>
         <Match path="/pdp/:id">
-          {({ matches, path, url }) => {
+          {({ matches, path }) => {
             const productId = path?.split("/")[2];
             const productModel = phoneListStorage?.dataListPhones?.find(
               ({ id }) => id === productId

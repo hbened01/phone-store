@@ -7,7 +7,7 @@ import { MdOutlineScreenshot } from "react-icons/md";
 import { RxDimensions } from "react-icons/rx";
 import { GiWeight } from "react-icons/gi";
 
-function PdpDescription({
+const PdpDescription = ({
   brand,
   model,
   announced,
@@ -20,7 +20,7 @@ function PdpDescription({
   secondaryCmera,
   dimentions,
   weight,
-}) {
+}) => {
   return (
     <>
       <h2 className="text-sm title-font text-gray-500 tracking-widest">
