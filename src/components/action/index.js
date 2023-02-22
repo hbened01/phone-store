@@ -13,7 +13,7 @@ const PdpAction = (props) => {
   const [storage, setStorage] = useState({});
   const [isNotify, setIsNotify] = useState(false);
   const [notifyData, setNotifyData] = useState({});
-  const { price, options } = props;
+  const { id, price, options, handleAddProductToCart } = props;
   const listBtnColors = useRef(null);
 
   const getButtons = async (el) => {
@@ -45,10 +45,10 @@ const PdpAction = (props) => {
         handleClosed: setIsNotify,
       });
       setIsNotify(true);
-      setTimeout(() => setIsNotify(false), 5000);
+      setTimeout(() => setIsNotify(false), 3000);
       return;
     }
-    console.log(data);
+    handleAddProductToCart({colorCode: color?.code , storageCode: storage?.code, id});
   };
 
   return (
@@ -59,7 +59,7 @@ const PdpAction = (props) => {
           <div className={style.test} ref={listBtnColors}>
             {options?.colors?.map((option, key) => {
               const colorCode = COLORS?.find(
-                ({ name }) => name.toLowerCase() === option?.name?.toLowerCase()
+                ({ name }) => name.toLowerCase() === option?.name?.toLowerCase() || option?.name?.toLowerCase().indexOf(name.toLowerCase()) !== -1
               );
               return (
                 <button

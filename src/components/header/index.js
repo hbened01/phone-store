@@ -7,6 +7,7 @@ import style from "./style.css";
 
 const Header = () => {
   const { phoneListStorage, cartListStorage } = useContext(Context);
+  console.log(cartListStorage)
   return (
     <header className={style.header}>
       <div className={style.logo}>
