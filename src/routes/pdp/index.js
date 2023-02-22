@@ -1,19 +1,59 @@
 import { h } from "preact";
-import { useEffect, useState, useRef } from "preact/hooks";
+import { useEffect, useState, useRef, useContext } from "preact/hooks";
+import { route } from "preact-router";
 import { addHours, getTime } from "date-fns";
-import { getProductByIdPdp } from "@/services";
+import { getProductByIdPdp, postToCart } from "@/services";
 import { Image, PdpAction, PdpDescription, Loader } from "@/components/";
 import { isObjectEmpty } from "@/utils";
+import { Context } from "@/contexts";
 import style from "./style.css";
 
 const Pdp = ({ id }) => {
   const [productDetail, setProducDetail] = useState({});
   const productsDetailData = useRef(null);
+  const { setCartListStorage, setNotify } = useContext(Context);
 
   // GET DATA FROM LOCAL STORAGE:
   productsDetailData.current = JSON.parse(
     window.localStorage.getItem("DATA_PRODUCTS_DETAIL_STORE")
   );
+
+  // ADD PRODUCT TO CART SERVICE:
+  const handleAddProductToCart = (product) => {
+    postToCart(product)
+      .then(() => {
+        // SET AND GET UNIQUE VALUES
+        setCartListStorage((prevState) => {
+          const newCartListData = Object.values(
+            [...prevState, product].reduce((a, p) => {
+              a[`${p.id}|${p.colorCode}|${p.storageCode}`] = p;
+              return a;
+            }, {})
+          );
+          // SET LIST DATA CART INTO LOCAL STORAGE:
+          window.localStorage.setItem(
+            "DATA_CART_ITEMS",
+            JSON.stringify(newCartListData)
+          );
+          return newCartListData;
+        });
+      })
+      .catch((error) => {
+        // SET NOTIFY:
+        setNotify((prevState) => ({
+          ...prevState,
+          ...{
+            type: "danger",
+            message: error.message,
+            isNotify: true,
+          },
+        }));
+      })
+      .finally(() => {
+        // GO TO HOME:
+        route(`/`);
+      });
+  };
 
   useEffect(() => {
     // FIND INDEX OF PRODUCT:
@@ -47,7 +87,17 @@ const Pdp = ({ id }) => {
           // SET DATA PRODUCT IN STATE:
           setProducDetail(data);
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+          // SET NOTIFY:
+          setNotify((prevState) => ({
+            ...prevState,
+            ...{
+              type: "danger",
+              message: error.message,
+              isNotify: true,
+            },
+          }));
+        })
         .finally(() => {});
       return;
     }
@@ -55,7 +105,7 @@ const Pdp = ({ id }) => {
       // SET DATA PRODUCT IN STATE:
       setProducDetail(productsDetailData.current[isMatchIndex]?.dataProduct);
     }, 500);
-  }, [id]);
+  }, [id, setNotify]);
   return (
     <>
       {!isObjectEmpty(productDetail) && (
@@ -75,7 +125,10 @@ const Pdp = ({ id }) => {
                 />
                 <div className="md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                   <PdpDescription {...productDetail} />
-                  <PdpAction {...productDetail} />
+                  <PdpAction
+                    handleAddProductToCart={handleAddProductToCart}
+                    {...productDetail}
+                  />
                 </div>
               </div>
             </div>
