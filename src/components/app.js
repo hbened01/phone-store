@@ -109,7 +109,7 @@ const App = () => {
         <main>
           <Router>
             <Plp path="/phone-store/" />
-            <Pdp path="/phone-store/pdp/:id" />
+            <Pdp path="/phone-store/pdp/:id/" />
           </Router>
         </main>
         {notify?.isNotify && (

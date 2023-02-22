@@ -10,7 +10,7 @@ const Plp = () => {
   const [listPhoneFiltered, setListPhoneFiltered] = useState([]);
 
   const handleLinkToPdpPhone = (id) => {
-    route(`/pdp/${id}`);
+    route(`/phone-store/pdp/${id}/`);
   };
 
   const handleDataFiltered = (filter) => {
