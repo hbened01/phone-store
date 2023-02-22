@@ -53,12 +53,12 @@ const Header = () => {
           <h1>Phone Store</h1>
         </div>
         <nav className="flex items-center" aria-label="Breadcrumb">
-          <Link activeClassName={style.active} href="/phone-store/">
+          <Link activeClassName={style.active} href="/">
             Home
           </Link>
-          <Match path="/phone-store/pdp/:id">
+          <Match path="/pdp/:id">
             {({ matches, path }) => {
-              const productId = path?.split("/")[3];
+              const productId = path?.split("/")[2];
               const productModel = phoneListStorage?.dataListPhones?.find(
                 ({ id }) => id === productId
               )?.model;
@@ -113,7 +113,7 @@ const Header = () => {
               key={product?.id}
               className="flex w-full px-4 py-3 hover:bg-gray-100 cursor-default"
             >
-              <div className="flex-shrink-0 cursor-pointer" onClick={() => route(`/phone-store/pdp/${product?.id}`)}>
+              <div className="flex-shrink-0 cursor-pointer" onClick={() => route(`/pdp/${product?.id}`)}>
                 <img
                   className="object-contain object-center rounded-lg w-14 h-14"
                   src={product?.imgUrl}
