@@ -7,6 +7,8 @@ const Context = createContext({
   setIsLoading: () => {},
   cartListStorage: [],
   setCartListStorage: () => {},
+  notify: {},
+  setNotify: () => {},
 });
 
 export { Context };

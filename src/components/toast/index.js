@@ -1,7 +1,7 @@
 import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 
-function Toast({ type, message, handleClosed }) {
+function Toast({ type, message, handleClosed, notifyTimeout }) {
   const [toast, setToast] = useState("");
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function Toast({ type, message, handleClosed }) {
               class="ml-4 -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
               data-dismiss-target="#toast-success"
               aria-label="Close"
-              onClick={() => handleClosed(false)}
+              onClick={handleClosed}
             >
               <svg
                 aria-hidden="true"
@@ -86,7 +86,7 @@ function Toast({ type, message, handleClosed }) {
               class="ml-4 -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
               data-dismiss-target="#toast-warning"
               aria-label="Close"
-              onClick={() => handleClosed(false)}
+              onClick={handleClosed}
             >
               <span class="sr-only">Close</span>
               <svg
@@ -137,7 +137,7 @@ function Toast({ type, message, handleClosed }) {
               class="ml-4 -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
               data-dismiss-target="#toast-danger"
               aria-label="Close"
-              onClick={() => handleClosed(false)}
+              onClick={handleClosed}
             >
               <span class="sr-only">Close</span>
               <svg
@@ -158,7 +158,9 @@ function Toast({ type, message, handleClosed }) {
         );
         break;
     }
-  }, [message, type, handleClosed]);
+    // AUTO CLOSED NOTIFY:
+    notifyTimeout();
+  }, [message, type, handleClosed, notifyTimeout]);
 
   return <>{toast}</>;
 }

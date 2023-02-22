@@ -1,20 +1,19 @@
 import { h } from "preact";
 import PropTypes from "prop-types";
-import { useRef, useState } from "preact/hooks";
+import { useRef, useState, useContext } from "preact/hooks";
 import CurrencyFormat from "react-currency-format";
-import { Toast } from "@/components";
 import { COLORS } from "@/constants/";
 import { isObjectEmpty } from "@/utils";
+import { Context } from "@/contexts";
 import { FaEuroSign } from "react-icons/fa";
 import style from "./style.css";
 
 const PdpAction = (props) => {
   const [color, setColor] = useState({});
   const [storage, setStorage] = useState({});
-  const [isNotify, setIsNotify] = useState(false);
-  const [notifyData, setNotifyData] = useState({});
   const { id, price, options, handleAddProductToCart } = props;
   const listBtnColors = useRef(null);
+  const { setNotify } = useContext(Context);
 
   const getButtons = async (el) => {
     return await el?.getElementsByTagName("button");
@@ -37,18 +36,23 @@ const PdpAction = (props) => {
       });
   };
 
-  const handleAddToCart = (data) => {
+  const handleAddToCart = () => {
     if (isObjectEmpty(color) || isObjectEmpty(storage)) {
-      setNotifyData({
-        type: "warning",
-        message: "Select color and storage for to add in the cart.",
-        handleClosed: setIsNotify,
-      });
-      setIsNotify(true);
-      setTimeout(() => setIsNotify(false), 3000);
+      setNotify((prevState) => ({
+        ...prevState,
+        ...{
+          type: "warning",
+          message: "Select color and storage for to add in the cart.",
+          isNotify: true,
+        },
+      }));
       return;
     }
-    handleAddProductToCart({colorCode: color?.code , storageCode: storage?.code, id});
+    handleAddProductToCart({
+      colorCode: color?.code,
+      storageCode: storage?.code,
+      id,
+    });
   };
 
   return (
@@ -59,7 +63,9 @@ const PdpAction = (props) => {
           <div className={style.test} ref={listBtnColors}>
             {options?.colors?.map((option, key) => {
               const colorCode = COLORS?.find(
-                ({ name }) => name.toLowerCase() === option?.name?.toLowerCase() || option?.name?.toLowerCase().indexOf(name.toLowerCase()) !== -1
+                ({ name }) =>
+                  name.toLowerCase() === option?.name?.toLowerCase() ||
+                  option?.name?.toLowerCase().indexOf(name.toLowerCase()) !== -1
               );
               return (
                 <button
@@ -118,12 +124,11 @@ const PdpAction = (props) => {
         </span>
         <button
           className="flex ml-auto text-white bg-cyan-700 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-900 rounded"
-          onClick={() => handleAddToCart(props)}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </button>
       </div>
-      {isNotify && <Toast {...notifyData} />}
     </>
   );
 };

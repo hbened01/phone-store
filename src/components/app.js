@@ -2,14 +2,13 @@ import { h } from "preact";
 import { Router } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
 import { addHours, getTime } from "date-fns";
-import { Header } from "@/components";
+import { Header, Toast } from "@/components";
 import { Context } from "@/contexts";
 import { getListPlp } from "@/services";
 
 // Code-splitting is automated for `routes` directory
 import Plp from "@/routes/plp";
 import Pdp from "@/routes/pdp";
-
 
 const App = () => {
   const [phoneListStorage, setPhoneListStorage] = useState(
@@ -19,6 +18,24 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [cartListStorage, setCartListStorage] = useState([]);
+
+  const [notify, setNotify] = useState({
+    type: "",
+    message: "",
+    isNotify: false,
+    notifyTimeout() {
+      setTimeout(() => {
+        setNotify((prevState) => ({
+          ...prevState,
+          ...{
+            type: "",
+            message: "",
+            isNotify: false,
+          },
+        }));
+      }, 3000);
+    },
+  });
 
   useEffect(() => {
     setIsLoading(true);
@@ -61,17 +78,34 @@ const App = () => {
           setPhoneListStorage,
           isLoading,
           setIsLoading,
+          notify,
+          setNotify,
           cartListStorage,
-          setCartListStorage
+          setCartListStorage,
         }}
       >
         <Header />
         <main>
           <Router>
             <Plp path="/" />
-				    <Pdp path="/pdp/:id" />
+            <Pdp path="/pdp/:id" />
           </Router>
         </main>
+        {notify?.isNotify && (
+          <Toast
+            handleClosed={() =>
+              setNotify((prevState) => ({
+                ...prevState,
+                ...{
+                  type: "",
+                  message: "",
+                  isNotify: false,
+                },
+              }))
+            }
+            {...notify}
+          />
+        )}
       </Context.Provider>
     </div>
   );
