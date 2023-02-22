@@ -18,6 +18,8 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [cartListStorage, setCartListStorage] = useState([]);
+
   useEffect(() => {
     setIsLoading(true);
     // Get data list:
@@ -58,6 +60,9 @@ const App = () => {
           phoneListStorage,
           setPhoneListStorage,
           isLoading,
+          setIsLoading,
+          cartListStorage,
+          setCartListStorage
         }}
       >
         <Header />
