@@ -1,5 +1,5 @@
 .pdp {
-  @apply flex h-full w-full min-h-screen;
+  @apply flex h-full w-screen min-h-screen;
 }
 
 .pdp section {
