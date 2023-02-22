@@ -6,6 +6,7 @@ export default (config, env, helpers) => {
     ...config.resolve.alias,
   };
   config.node.process = true;
+  config.output.publicPath = './';
   return config;
 };
 
