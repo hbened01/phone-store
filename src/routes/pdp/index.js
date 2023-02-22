@@ -51,7 +51,7 @@ const Pdp = ({ id }) => {
       })
       .finally(() => {
         // GO TO HOME:
-        route(`/`);
+        route(`/phone-store/`);
       });
   };
 
