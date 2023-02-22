@@ -6,7 +6,7 @@ import { BsCart3 } from "react-icons/bs";
 import style from "./style.css";
 
 const Header = () => {
-  const { phoneListStorage } = useContext(Context);
+  const { phoneListStorage, cartListStorage } = useContext(Context);
   return (
     <header className={style.header}>
       <div className={style.logo}>
@@ -60,7 +60,7 @@ const Header = () => {
         >
           <BsCart3 className="w-6 h-6" />
           <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2">
-            20
+            {cartListStorage?.length}
           </div>
         </button>
       </div>
