@@ -2,17 +2,19 @@ import { h } from "preact";
 import PropTypes from "prop-types";
 import { useRef, useState } from "preact/hooks";
 import CurrencyFormat from "react-currency-format";
+import { Toast } from "@/components";
 import { COLORS } from "@/constants/";
+import { isObjectEmpty } from "@/utils";
 import { FaEuroSign } from "react-icons/fa";
 import style from "./style.css";
 
 const PdpAction = (props) => {
   const [color, setColor] = useState({});
   const [storage, setStorage] = useState({});
+  const [isNotify, setIsNotify] = useState(false);
+  const [notifyData, setNotifyData] = useState({});
   const { price, options } = props;
   const listBtnColors = useRef(null);
-
-  console.log(color, storage);
 
   const getButtons = async (el) => {
     return await el?.getElementsByTagName("button");
@@ -36,6 +38,16 @@ const PdpAction = (props) => {
   };
 
   const handleAddToCart = (data) => {
+    if (isObjectEmpty(color) || isObjectEmpty(storage)) {
+      setNotifyData({
+        type: "warning",
+        message: "Select color and storage for to add in the cart.",
+        handleClosed: setIsNotify,
+      });
+      setIsNotify(true);
+      setTimeout(() => setIsNotify(false), 5000);
+      return;
+    }
     console.log(data);
   };
 
@@ -63,10 +75,13 @@ const PdpAction = (props) => {
         <div className="flex items-center ml-10 ">
           <span className="mr-3">Storage</span>
           <div className="relative">
-            <select className="rounded border appearance-none border-gray-400 py-1 focus:outline-none focus:border-red-500 text-base pl-3 pr-10" onChange={(e) => setStorage(JSON.parse(e.target.value))}>
+            <select
+              className="rounded border appearance-none border-gray-400 py-1 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
+              onChange={(e) => setStorage(JSON.parse(e.target.value))}
+            >
               <option value={JSON.stringify({})}> Select </option>
               {options?.storages.map(({ code, name }) => (
-                <option key={code} value={JSON.stringify({code, name})}>
+                <option key={code} value={JSON.stringify({ code, name })}>
                   {name}
                 </option>
               ))}
@@ -108,9 +123,10 @@ const PdpAction = (props) => {
           Add to Cart
         </button>
       </div>
+      {isNotify && <Toast {...notifyData} />}
     </>
-  )
-}
+  );
+};
 
 PdpAction.propTypes = {
   price: PropTypes.string,
