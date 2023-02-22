@@ -1,7 +1,7 @@
 {
   "bundle.css": "bundle.a23b7.css",
-  "bundle.js": "bundle.76098.esm.js",
-  "bundle.js.map": "bundle.76098.esm.js.map",
+  "bundle.js": "bundle.0f1ac.esm.js",
+  "bundle.js.map": "bundle.0f1ac.esm.js.map",
   "polyfills.js": "polyfills.b4de5.esm.js",
   "polyfills.js.map": "polyfills.b4de5.esm.js.map",
   "route-pdp.css": "route-pdp.chunk.44223.css",
@@ -10,6 +10,7 @@
   "route-plp.css": "route-plp.chunk.5e2ad.css",
   "route-plp.js": "route-plp.chunk.9a443.esm.js",
   "route-plp.js.map": "route-plp.chunk.9a443.esm.js.map",
+  "logo.svg": "308d73f5feaedc7f7a568da15308ee06.svg",
   "assets/icons/android/android-launchericon-144-144.png": "assets/icons/android/android-launchericon-144-144.png",
   "assets/icons/android/android-launchericon-192-192.png": "assets/icons/android/android-launchericon-192-192.png",
   "assets/icons/android/android-launchericon-48-48.png": "assets/icons/android/android-launchericon-48-48.png",

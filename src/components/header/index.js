@@ -7,6 +7,7 @@ import { Context } from "@/contexts";
 import { BsCart3 } from "react-icons/bs";
 import { FaEuroSign } from "react-icons/fa";
 import { GrMoney } from "react-icons/gr";
+import logo from "@/assets/logo.svg";
 import style from "./style.css";
 
 const Header = () => {
@@ -44,7 +45,7 @@ const Header = () => {
       <header className={style.header}>
         <div className={style.logo}>
           <img
-            src="../../assets/logo.svg"
+            src={logo}
             alt="Phone Logo"
             height="32"
             width="32"
