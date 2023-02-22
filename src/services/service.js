@@ -7,7 +7,6 @@ const url  = PREACT_APP_API_URL ?? "https://itx-frontend-test.onrender.com";
 
 const service = create({
   baseURL: url,
-  timeout: 10000,
 });
 
 export default service;

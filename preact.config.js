@@ -6,4 +6,7 @@ export default (config, env, helpers) => {
     ...config.resolve.alias,
   };
   config.node.process = true;
+  return config;
 };
+
+

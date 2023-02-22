@@ -1,41 +1,89 @@
 import { h } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState, useRef } from "preact/hooks";
+import { addHours, getTime } from "date-fns";
 import { getProductByIdPdp } from "@/services";
-import { Image, PdpAction, PdpDescription } from "@/components/";
+import { Image, PdpAction, PdpDescription, Loader } from "@/components/";
+import { isObjectEmpty } from "@/utils";
 import style from "./style.css";
 
 const Pdp = ({ id }) => {
   const [productDetail, setProducDetail] = useState({});
+  const productsDetailData = useRef(null);
+
+  // GET DATA FROM LOCAL STORAGE:
+  productsDetailData.current = JSON.parse(
+    window.localStorage.getItem("DATA_PRODUCTS_DETAIL_STORE")
+  );
+
   useEffect(() => {
-    getProductByIdPdp(id)
-      .then((data) => {
-        setProducDetail(data);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => {});
+    // FIND INDEX OF PRODUCT:
+    const isMatchIndex = productsDetailData.current?.findIndex(
+      ({ productId }) => productId === id
+    );
+    if (
+      !productsDetailData.current ||
+      isMatchIndex === -1 ||
+      getTime(new Date()) >
+        productsDetailData.current[isMatchIndex]?.timeControl
+    ) {
+      getProductByIdPdp(id)
+        .then((data) => {
+          const timeControl = getTime(addHours(new Date(), 1)); // CONTROL EPISODE API TIME 1 HRS.
+          const newDataForStorage = [
+            ...(productsDetailData.current || []),
+            ...[
+              {
+                timeControl,
+                productId: id,
+                dataProduct: data,
+              },
+            ],
+          ];
+          // SET DATA IN LOCALSTORAGE:
+          window.localStorage.setItem(
+            "DATA_PRODUCTS_DETAIL_STORE",
+            JSON.stringify(newDataForStorage)
+          );
+          // SET DATA PRODUCT IN STATE:
+          setProducDetail(data);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => {});
+      return;
+    }
+    setTimeout(() => {
+      // SET DATA PRODUCT IN STATE:
+      setProducDetail(productsDetailData.current[isMatchIndex]?.dataProduct);
+    }, 500);
   }, [id]);
   return (
-    <div className={style.pdp}>
-      <section>
-        <div className="px-10 py-10 mx-auto">
-          <div className="mx-auto flex flex-wrap justify-between">
-            <Image
-              {...{
-                wrapperClass: "!flex flex-col justify-center items-center md:w-1/2 w-full",
-                delayTime: 1000,
-                effect: "blur",
-                imgUrl: productDetail?.imgUrl || "",
-                id: productDetail?.id || "",
-              }}
-            />
-            <div className="md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-              <PdpDescription {...productDetail} />
-              <PdpAction {...productDetail} />
+    <>
+      {!isObjectEmpty(productDetail) && (
+        <div className={style.pdp}>
+          <section>
+            <div className="px-10 py-10 mx-auto">
+              <div className="mx-auto flex flex-wrap justify-between">
+                <Image
+                  {...{
+                    wrapperClass:
+                      "!flex flex-col justify-center items-center md:w-1/2 w-full",
+                    delayTime: 1000,
+                    effect: "blur",
+                    imgUrl: productDetail?.imgUrl || "",
+                    id: productDetail?.id || "",
+                  }}
+                />
+                <div className="md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                  <PdpDescription {...productDetail} />
+                  <PdpAction {...productDetail} />
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
         </div>
-      </section>
-    </div>
+      )}
+      {isObjectEmpty(productDetail) && <Loader />}
+    </>
   );
 };
 

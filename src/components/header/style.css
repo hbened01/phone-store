@@ -1,5 +1,5 @@
 .header {
-	@apply flex fixed left-0 top-0 justify-start w-[100%] h-[3.5rem] bg-gradient-to-r from-blue-900 to-cyan-700 z-50;
+	@apply flex fixed left-0 top-0 justify-start w-[100%] h-[3.5rem] bg-gradient-to-r from-blue-900 to-cyan-900 z-50;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
