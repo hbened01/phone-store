@@ -1,6 +1,6 @@
 import { h } from "preact";
 import PropTypes from "prop-types";
-import { useRef, useState, useContext } from "preact/hooks";
+import { useRef, useState, useContext, useEffect } from "preact/hooks";
 import CurrencyFormat from "react-currency-format";
 import { COLORS } from "@/constants/";
 import { isObjectEmpty } from "@/utils";
@@ -11,7 +11,7 @@ import style from "./style.css";
 const PdpAction = (props) => {
   const [color, setColor] = useState({});
   const [storage, setStorage] = useState({});
-  const { id, price, options, handleAddProductToCart } = props;
+  const { id, model, price, imgUrl, options, handleAddProductToCart } = props;
   const listBtnColors = useRef(null);
   const { setNotify } = useContext(Context);
 
@@ -52,8 +52,31 @@ const PdpAction = (props) => {
       colorCode: color?.code,
       storageCode: storage?.code,
       id,
+      model,
+      price,
+      imgUrl,
     });
   };
+
+  useEffect(() => {
+    // VERIFIC IS VALUE DEFAULt:
+    setStorage((prevState) =>
+      options?.storages?.length === 1
+        ? {
+            code: options?.storages[0]?.code,
+            name: options?.storages[0]?.name,
+          }
+        : prevState
+    );
+    setColor((prevState) =>
+      options?.colors?.length === 1
+        ? {
+            code: options?.colors[0]?.code,
+            name: options?.colors[0]?.name,
+          }
+        : prevState
+    );
+  }, [options]);
 
   return (
     <>
@@ -61,7 +84,7 @@ const PdpAction = (props) => {
         <div className="flex items-center">
           <span className="mr-3">Color</span>
           <div className={style.test} ref={listBtnColors}>
-            {options?.colors?.map((option, key) => {
+            {options?.colors?.map((option, key, options) => {
               const colorCode = COLORS?.find(
                 ({ name }) =>
                   name.toLowerCase() === option?.name?.toLowerCase() ||
@@ -70,7 +93,7 @@ const PdpAction = (props) => {
               return (
                 <button
                   key={option?.code}
-                  className={`btn-color-${key} border-2 border-gray-300 ml-1 rounded-full w-6 h-6 hover:bg-black/[.1] focus:outline-none focus:ring-1 focus:ring-black/[.5]`}
+                  className={`btn-color-${key} border-2 border-gray-300 ml-1 rounded-full w-6 h-6 hover:bg-black/[.1] focus:outline-none focus:ring-1 focus:ring-black/[.5] ${options.length ===1 ? style?.active: ''}`}
                   style={{ backgroundColor: `${colorCode?.hex}` }}
                   onClick={(e) => handleSelectColor(e, option)}
                 />
@@ -85,12 +108,16 @@ const PdpAction = (props) => {
               className="rounded border appearance-none border-gray-400 py-1 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
               onChange={(e) => setStorage(JSON.parse(e.target.value))}
             >
-              <option value={JSON.stringify({})}> Select </option>
-              {options?.storages.map(({ code, name }) => (
-                <option key={code} value={JSON.stringify({ code, name })}>
-                  {name}
-                </option>
-              ))}
+              {options?.storages?.length > 1 && (
+                <option value={JSON.stringify({})}> Select </option>
+              )}
+              {options?.storages.map(({ code, name }) => {
+                return (
+                  <option key={code} value={JSON.stringify({ code, name })}>
+                    {name}
+                  </option>
+                );
+              })}
             </select>
             <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
               <svg
