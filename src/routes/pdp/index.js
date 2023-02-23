@@ -6,6 +6,7 @@ import { getProductByIdPdp, postToCart } from "@/services";
 import { Image, PdpAction, PdpDescription, Loader } from "@/components/";
 import { isObjectEmpty } from "@/utils";
 import { Context } from "@/contexts";
+import { PREACT_APP_PUBLIC_PATH } from "@/constants";
 import style from "./style.css";
 
 const Pdp = ({ id }) => {
@@ -51,7 +52,7 @@ const Pdp = ({ id }) => {
       })
       .finally(() => {
         // GO TO HOME:
-        route(`/phone-store/`);
+        route(`${PREACT_APP_PUBLIC_PATH}`);
       });
   };
 

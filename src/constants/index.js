@@ -1,4 +1,5 @@
 const { PREACT_APP_API_URL } = process.env;
+const PREACT_APP_PUBLIC_PATH = process.env.NODE_ENV==='development' ? process.env.PREACT_APP_PUBLIC_PATH_DEV : process.env.PREACT_APP_PUBLIC_PATH_PROD;
 
 const COLORS = [
   {
@@ -843,4 +844,4 @@ const COLORS = [
   },
 ];
 
-export { PREACT_APP_API_URL, COLORS };
+export { PREACT_APP_API_URL, PREACT_APP_PUBLIC_PATH, COLORS };

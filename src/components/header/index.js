@@ -4,6 +4,7 @@ import { route } from "preact-router";
 import { useContext, useState, useRef, useEffect } from "preact/hooks";
 import CurrencyFormat from "react-currency-format";
 import { Context } from "@/contexts";
+import { PREACT_APP_PUBLIC_PATH } from "@/constants";
 import { BsCart3 } from "react-icons/bs";
 import { FaEuroSign } from "react-icons/fa";
 import { GrMoney } from "react-icons/gr";
@@ -53,12 +54,12 @@ const Header = () => {
           <h1>Phone Store</h1>
         </div>
         <nav className="flex items-center" aria-label="Breadcrumb">
-          <Link activeClassName={style.active} href="/phone-store/">
+          <Link activeClassName={style.active} href={`${PREACT_APP_PUBLIC_PATH}`}>
             Home
           </Link>
-          <Match path="/phone-store/pdp/:id">
+          <Match path={`${PREACT_APP_PUBLIC_PATH}pdp/:id`}>
             {({ matches, path }) => {
-              const productId = path?.split("/")[3];
+              const productId = path?.split("/")[PREACT_APP_PUBLIC_PATH === "/phone-store/" ? 3 : 2];
               const productModel = phoneListStorage?.dataListPhones?.find(
                 ({ id }) => id === productId
               )?.model;
@@ -113,7 +114,7 @@ const Header = () => {
               key={product?.id}
               className="flex w-full px-4 py-3 hover:bg-gray-100 cursor-default"
             >
-              <div className="flex-shrink-0 cursor-pointer" onClick={() => route(`/phone-store/pdp/${product?.id}`)}>
+              <div className="flex-shrink-0 cursor-pointer" onClick={() => route(`${PREACT_APP_PUBLIC_PATH}pdp/${product?.id}`)}>
                 <img
                   className="object-contain object-center rounded-lg w-14 h-14"
                   src={product?.imgUrl}

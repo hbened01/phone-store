@@ -5,6 +5,7 @@ import { addHours, getTime } from "date-fns";
 import { Header, Toast } from "@/components";
 import { Context } from "@/contexts";
 import { getListPlp } from "@/services";
+import { PREACT_APP_PUBLIC_PATH } from "@/constants";
 
 // Code-splitting is automated for `routes` directory
 import Plp from "@/routes/plp";
@@ -108,8 +109,8 @@ const App = () => {
         <Header />
         <main>
           <Router>
-            <Plp path="/phone-store/" />
-            <Pdp path="/phone-store/pdp/:id" />
+            <Plp path={`${PREACT_APP_PUBLIC_PATH}`} />
+            <Pdp path={`${PREACT_APP_PUBLIC_PATH}pdp/:id`} />
           </Router>
         </main>
         {notify?.isNotify && (

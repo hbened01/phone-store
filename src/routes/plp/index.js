@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "preact/hooks";
 import { route } from "preact-router";
 import { Context } from "@/contexts";
 import { Card, Search, Loader } from "@/components";
+import { PREACT_APP_PUBLIC_PATH } from "@/constants";
 import style from "./style.css";
 
 const Plp = () => {
@@ -10,7 +11,7 @@ const Plp = () => {
   const [listPhoneFiltered, setListPhoneFiltered] = useState([]);
 
   const handleLinkToPdpPhone = (id) => {
-    route(`/phone-store/pdp/${id}/`);
+    route(`${PREACT_APP_PUBLIC_PATH}pdp/${id}/`);
   };
 
   const handleDataFiltered = (filter) => {
@@ -31,7 +32,7 @@ const Plp = () => {
 
   useEffect(() => {
     setListPhoneFiltered(phoneListStorage?.dataListPhones);
-  }, [phoneListStorage])
+  }, [phoneListStorage]);
 
   return (
     <>
