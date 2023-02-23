@@ -1,4 +1,5 @@
-import { h } from "preact";
+import { h, Fragment } from "preact";
+import PropTypes from 'prop-types';
 import { useState, useEffect } from "preact/hooks";
 
 function Toast({ type, message, handleClosed, notifyTimeout }) {
@@ -28,7 +29,7 @@ function Toast({ type, message, handleClosed, notifyTimeout }) {
                 />
               </svg>
             </div>
-            <div className="ml-3 text-sm text-justify font-bold drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]">
+            <div id="msg-success" className="ml-3 text-sm text-justify font-bold drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]">
               {message}
             </div>
             <button
@@ -77,7 +78,7 @@ function Toast({ type, message, handleClosed, notifyTimeout }) {
               </svg>
               <span className="sr-only">Warning icon</span>
             </div>
-            <div className="ml-3 text-sm text-justify font-bold drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]">
+            <div id="msg-warning" className="ml-3 text-sm text-justify font-bold drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]">
               {message}
             </div>
             <button
@@ -127,7 +128,7 @@ function Toast({ type, message, handleClosed, notifyTimeout }) {
               </svg>
               <span className="sr-only">Error icon</span>
             </div>
-            <div className="ml-3 text-sm text-justify font-bold drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]">
+            <div id="msg-danger" className="ml-3 text-sm text-justify font-bold drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)]">
               {message}
             </div>
             <button
@@ -161,5 +162,12 @@ function Toast({ type, message, handleClosed, notifyTimeout }) {
 
   return <>{toast}</>;
 }
+
+Toast.propTypes = {
+  type: PropTypes.string,
+  message: PropTypes.string,
+  // handleClosed: PropTypes.func,
+  // notifyTimeout:  PropTypes.func,
+};
 
 export default Toast;

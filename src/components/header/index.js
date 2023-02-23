@@ -108,6 +108,7 @@ const Header = () => {
         <div className="absolute right-5 top-2 flex items-center">
           <button
             type="button"
+            id="cart-list"
             onClick={handleToggleShoppingList}
             className="float-right relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-transparent rounded-lg hover:bg-black/[.1] leading-[3.5rem] focus:outline-none focus:ring-1 focus:ring-black/[.5]"
           >

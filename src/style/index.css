@@ -6,7 +6,7 @@
 	font-family: 'Helvetica Neue', arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-  @apply bg-gradient-to-l from-blue-50 to-blue-500
+  @apply bg-gradient-to-l from-gray-100 to-blue-100
 }
 
 body {

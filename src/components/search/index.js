@@ -29,6 +29,7 @@ const Search = ({ placeholder, onChange, count }) => {
 Search.propTypes = {
   count: PropTypes.number,
   onChange: PropTypes.func,
+  placeholder: PropTypes.string,
 };
 
 export default Search;
