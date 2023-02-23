@@ -8,10 +8,9 @@ import { Context } from "@/contexts";
 import { FaEuroSign } from "react-icons/fa";
 import style from "./style.css";
 
-const PdpAction = (props) => {
+const PdpAction = ({id, model, price, imgUrl, options, handleAddProductToCart}) => {
   const [color, setColor] = useState({});
   const [storage, setStorage] = useState({});
-  const { id, model, price, imgUrl, options, handleAddProductToCart } = props;
   const listBtnColors = useRef(null);
   const { setNotify } = useContext(Context);
 
@@ -161,8 +160,12 @@ const PdpAction = (props) => {
 };
 
 PdpAction.propTypes = {
+  id: PropTypes.string,
   price: PropTypes.string,
-  color: PropTypes.array,
+  options: PropTypes.object,
+  imgUrl: PropTypes.string,
+  model: PropTypes.string,
+  handleAddProductToCart: PropTypes.func
 };
 
 export default PdpAction;

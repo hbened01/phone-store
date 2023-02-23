@@ -4,11 +4,11 @@ import { BsSearch } from "react-icons/bs";
 import { BiLoaderAlt } from "react-icons/bi";
 import style from "./style.css";
 
-const Search = ({ placeholder, onChange, count }) => {
+const Search = ({ placeholder, count, onChange }) => {
   return (
     <div className={style.search}>
       <div className="relative">
-        <span className="absolute -left-20 top-4 text-lg py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded">
+        <span id="count" className="absolute -left-20 top-4 text-lg py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-800 text-white rounded">
           {count ? count : <BiLoaderAlt className="animate-spin h-5 w-5" />}
         </span>
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
