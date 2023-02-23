@@ -1,9 +1,9 @@
 .card {
-  @apply xl:w-1/5 md:w-1/4 sm:w-1/3 w-11/12 h-auto bg-gradient-to-r from-cyan-50 to-cyan-300 border border-cyan-500 rounded-lg shadow-cyan-500 shadow drop-shadow-[4px_4px_4px_rgba(0,0,0,0.5)] hover:from-cyan-300 hover:to-cyan-50 cursor-pointer;
+  @apply xl:w-1/5 md:w-1/4 sm:w-1/3 w-11/12 h-auto bg-gradient-to-r from-cyan-50 to-cyan-200 rounded-lg shadow-cyan-500 shadow drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)] hover:from-cyan-200 hover:to-cyan-50 cursor-pointer;
 }
 
 .card img {
-  @apply w-40 object-cover object-center aspect-auto rounded-lg drop-shadow-[2px_2px_2px_rgba(0,0,0,0.5)];
+  @apply w-40 object-cover object-center aspect-auto rounded-xl;
 }
 
 .body {

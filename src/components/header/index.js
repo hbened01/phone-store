@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h, Fragment } from "preact";
 import Match, { Link } from "preact-router/match";
 import { route } from "preact-router";
 import { useContext, useState, useRef, useEffect } from "preact/hooks";
@@ -8,7 +8,7 @@ import { PREACT_APP_PUBLIC_PATH } from "@/constants";
 import { BsCart3 } from "react-icons/bs";
 import { FaEuroSign } from "react-icons/fa";
 import { GrMoney } from "react-icons/gr";
-import logo from "@/assets/logo.svg";
+import { FcSmartphoneTablet } from "react-icons/fc";
 import style from "./style.css";
 
 const Header = () => {
@@ -61,7 +61,7 @@ const Header = () => {
     <>
       <header ref={headerElement} className={style.header}>
         <div className={style.logo}>
-          <img src={logo} alt="Phone Logo" height="32" width="32" />
+          <FcSmartphoneTablet className="h-10 w-10" />
           <h1>Phone Store</h1>
         </div>
         <nav className="flex items-center" aria-label="Breadcrumb">
@@ -108,6 +108,7 @@ const Header = () => {
         <div className="absolute right-5 top-2 flex items-center">
           <button
             type="button"
+            id="cart-list"
             onClick={handleToggleShoppingList}
             className="float-right relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-transparent rounded-lg hover:bg-black/[.1] leading-[3.5rem] focus:outline-none focus:ring-1 focus:ring-black/[.5]"
           >
