@@ -2,7 +2,7 @@ import { h } from "preact";
 import { Router } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
 import { addHours, getTime } from "date-fns";
-import { Header, Toast } from "@/components";
+import { Header, Toast, Error } from "@/components";
 import { Context } from "@/contexts";
 import { getListPlp } from "@/services";
 import { PREACT_APP_PUBLIC_PATH } from "@/constants";
@@ -111,6 +111,7 @@ const App = () => {
           <Router>
             <Plp path={`${PREACT_APP_PUBLIC_PATH}`} />
             <Pdp path={`${PREACT_APP_PUBLIC_PATH}pdp/:id`} />
+            <Error type="404" default />
           </Router>
         </main>
         {notify?.isNotify && (

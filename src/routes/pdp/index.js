@@ -98,8 +98,9 @@ const Pdp = ({ id }) => {
               isNotify: true,
             },
           }));
-        })
-        .finally(() => {});
+          // GO TO HOME:
+          route(`${PREACT_APP_PUBLIC_PATH}`);
+        });
       return;
     }
     setTimeout(() => {
