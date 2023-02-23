@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-function Image({ imgUrl, id, wrapperClass, delayTime, effect }) {
+const Image = ({ imgUrl, id, wrapperClass, delayTime, effect }) => {
   return (
     <LazyLoadImage
       wrapperClassName={wrapperClass}
