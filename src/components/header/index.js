@@ -13,8 +13,17 @@ import style from "./style.css";
 
 const Header = () => {
   const [total, setTotal] = useState(0);
-  const { phoneListStorage, cartListStorage, setCartListStorage } = useContext(Context);
+  const { phoneListStorage, cartListStorage, setCartListStorage } =
+    useContext(Context);
   const shoppingListElement = useRef(null);
+  const headerElement = useRef(null);
+
+  const handleHiddenListItemCart = (e) => {
+    // CLICKED OUTSIDE LIST:
+    if (!headerElement.current.contains(e.target)) {
+      shoppingListElement.current.classList.add("hidden");
+    }
+  };
 
   const handleToggleShoppingList = () => {
     if (cartListStorage?.length === 0) return;
@@ -23,7 +32,7 @@ const Header = () => {
 
   const handleRemoveItemCart = (productId) => {
     setCartListStorage((prevState) => {
-      const newCartListData = prevState.filter(({id}) => id !== productId );
+      const newCartListData = prevState.filter(({ id }) => id !== productId);
       // SET LIST DATA CART INTO LOCAL STORAGE:
       window.localStorage.setItem(
         "DATA_CART_ITEMS",
@@ -38,28 +47,36 @@ const Header = () => {
       shoppingListElement.current.classList.add("hidden");
       return;
     }
-    setTotal(cartListStorage.reduce((acc, { price }) => acc + Number(price), 0));
+    setTotal(
+      cartListStorage.reduce((acc, { price }) => acc + Number(price), 0)
+    );
+
+    document.addEventListener("click", handleHiddenListItemCart);
+    return () => {
+      document.removeEventListener("click", handleHiddenListItemCart);
+    }
   }, [cartListStorage]);
 
   return (
     <>
-      <header className={style.header}>
+      <header ref={headerElement} className={style.header}>
         <div className={style.logo}>
-          <img
-            src={logo}
-            alt="Phone Logo"
-            height="32"
-            width="32"
-          />
+          <img src={logo} alt="Phone Logo" height="32" width="32" />
           <h1>Phone Store</h1>
         </div>
         <nav className="flex items-center" aria-label="Breadcrumb">
-          <Link activeClassName={style.active} href={`${PREACT_APP_PUBLIC_PATH}`}>
+          <Link
+            activeClassName={style.active}
+            href={`${PREACT_APP_PUBLIC_PATH}`}
+          >
             Home
           </Link>
           <Match path={`${PREACT_APP_PUBLIC_PATH}pdp/:id`}>
             {({ matches, path }) => {
-              const productId = path?.split("/")[PREACT_APP_PUBLIC_PATH === "/phone-store/" ? 3 : 2];
+              const productId =
+                path?.split("/")[
+                  PREACT_APP_PUBLIC_PATH === "/phone-store/" ? 3 : 2
+                ];
               const productModel = phoneListStorage?.dataListPhones?.find(
                 ({ id }) => id === productId
               )?.model;
@@ -114,7 +131,12 @@ const Header = () => {
               key={product?.id}
               className="flex w-full px-4 py-3 hover:bg-gray-100 cursor-default"
             >
-              <div className="flex-shrink-0 cursor-pointer" onClick={() => route(`${PREACT_APP_PUBLIC_PATH}pdp/${product?.id}`)}>
+              <div
+                className="flex-shrink-0 cursor-pointer"
+                onClick={() =>
+                  route(`${PREACT_APP_PUBLIC_PATH}pdp/${product?.id}`)
+                }
+              >
                 <img
                   className="object-contain object-center rounded-lg w-14 h-14"
                   src={product?.imgUrl}
