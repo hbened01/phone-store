@@ -23,7 +23,7 @@ npm run test
 npm run lint
 ```
 
-### Add in host file in the end next line
+### Add in your host file in the end next line
 ```
 127.0.0.1     phone-store.com
 ```
@@ -31,6 +31,8 @@ npm run lint
 ### Add .env file in the root directory with the following variables
 ```
 PREACT_APP_API_URL=https://itx-frontend-test.onrender.com
+PREACT_APP_PUBLIC_PATH_DEV=/
+PREACT_APP_PUBLIC_PATH_PROD=/phone-store/
 ```
 
 ### Documentation links
