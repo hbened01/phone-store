@@ -1,7 +1,7 @@
 import { h } from "preact";
 import { Link } from "preact-router/match";
 import { PREACT_APP_PUBLIC_PATH } from "@/constants";
-import img from "@/assets/404.jpg";
+import img from "./../../assets/404.jpg";
 import style from "./style.css";
 
 const NotFound = () => (
