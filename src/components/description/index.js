@@ -37,59 +37,61 @@ const PdpDescription = ({
         </h2>
         <ul className="max-w-md space-y-1 text-gray-500 list-inside">
           {os && (
-            <li className="flex items-center truncate">
-              <AiOutlineAndroid className="mr-2" />
-              {os}
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <AiOutlineAndroid className="inline-flex mr-1 min-w-[15px]" />
+              <span>{os}</span>
             </li>
           )}
           {cpu && (
-            <li className="flex items-center truncate">
-              <BsCpu className="mr-2" />
-              {cpu}
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <BsCpu className="inline-flex mr-1 min-w-[15px]" />
+              <span>{cpu}</span>
             </li>
           )}
           {ram && (
-            <li className="flex items-center truncate">
-              <CgSmartphoneRam className="mr-2" />
-              {ram}
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <CgSmartphoneRam className="inline-flex mr-1 min-w-[15px]" />
+              <span>{ram}</span>
             </li>
           )}
           {battery && (
-            <li className="flex items-center truncate">
-              <BsBattery className="mr-2" />
-              {battery}
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <BsBattery className="inline-flex mr-1 min-w-[15px]" />
+              <span>{battery}</span>
             </li>
           )}
           {displaySize && (
-            <li className="flex items-center truncate">
-              <MdOutlineScreenshot className="mr-2" />
-              {displaySize}
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <MdOutlineScreenshot className="inline-flex mr-1 min-w-[15px]" />
+              <span>{displaySize}</span>
             </li>
           )}
           {(primaryCamera || secondaryCmera) && (
-            <li className="flex items-center truncate">
-              <BsCamera className="mr-2" /> Front: (
-              {primaryCamera?.toString()?.replaceAll(",", ", ")}), Rear: (
-              {secondaryCmera?.toString()?.replaceAll(",", ", ")})
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <BsCamera className="inline-flex mr-1 min-w-[15px]" />
+              <span>
+                Front: ({primaryCamera?.toString()?.replaceAll(",", ", ")}),
+                Rear: ({secondaryCmera?.toString()?.replaceAll(",", ", ")})
+              </span>
             </li>
           )}
           {dimentions && (
-            <li className="flex items-center truncate">
-              <RxDimensions className="mr-2" />
-              {dimentions}
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <RxDimensions className="inline-flex mr-1 min-w-[15px]" />
+              <span>{dimentions}</span>
             </li>
           )}
           {weight && (
-            <li className="flex items-center truncate">
-              <GiWeight className="mr-2" />
-              {weight} gr
+            <li className="text-sm md:text-base lg:text-lg truncate hover:text-clip hover:overflow-visible">
+              <GiWeight className="inline-flex mr-1 min-w-[15px]" />
+              <span>{weight} gr</span>
             </li>
           )}
         </ul>
       </p>
     </>
   );
-}
+};
 
 PdpDescription.propTypes = {
   brand: PropTypes.string,
