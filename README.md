@@ -1,5 +1,5 @@
 # 📱 Phone Store Application
-Application make in Preact JS with test api, styles in tailwind, jest and others libraries.
+Application make in Preact JS, styles in tailwind, jest and others libraries.
 
 ## Live preview demo on github.com
 🔗 [Demo](https://hbened01.github.io/phone-store/)

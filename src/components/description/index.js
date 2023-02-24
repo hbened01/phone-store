@@ -32,10 +32,10 @@ const PdpDescription = ({
       <span className="font-normal text-gray-500">{announced}</span>
       <div className="border-t-2 border-gray-200 my-5" />
       <p className="leading-relaxed my-5">
-        <h2 className="mb-2 text-lg font-semibold text-gray-600 dark:text-white underline underline-offset-2">
+        <h2 className="mb-2 text-lg font-semibold text-gray-600">
           Technical specifications
         </h2>
-        <ul className="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
+        <ul className="max-w-md space-y-1 text-gray-500 list-inside">
           {os && (
             <li className="flex items-center truncate">
               <AiOutlineAndroid className="mr-2" />
